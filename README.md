@@ -3,9 +3,14 @@
 Cheesesquare Sample
 ===================================
 
+Demos the new Android Design library. This is not an exhaustive sample, but shows
+some of the important features in the Design library:
 
-
-Demos the new Android Design library.
+- Collapsing Toolbar
+- FloatingActionButton
+- View anchoring
+- NavigationView
+- Snackbar
 
 Pre-requisites
 --------------
