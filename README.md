@@ -1,5 +1,9 @@
+![alt text](https://raw.githubusercontent.com/chrisbanes/cheesesquare/master/art/icon.png)
+
 Cheesesquare Sample
 ===================================
+
+
 
 Demos the new Android Design library.
 
