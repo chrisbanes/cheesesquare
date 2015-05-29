@@ -14,3 +14,4 @@ hs_err_pid*
 local.properties
 build/
 .gradle/
+!gradle/wrapper/*.jar
