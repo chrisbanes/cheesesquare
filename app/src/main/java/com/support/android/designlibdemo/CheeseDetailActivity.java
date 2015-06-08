@@ -17,6 +17,7 @@
 package com.support.android.designlibdemo;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -42,6 +43,17 @@ public class CheeseDetailActivity extends AppCompatActivity {
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(Build.VERSION.SDK_INT>=21){
+            int result = 0;
+            int resourceId = getResources().getIdentifier(
+                    "status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = getResources().getDimensionPixelSize(resourceId);
+            }
+            CollapsingToolbarLayout.LayoutParams params = (CollapsingToolbarLayout.LayoutParams)toolbar.getLayoutParams();
+            params.topMargin -= result;
+            toolbar.setLayoutParams(params);
+        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
