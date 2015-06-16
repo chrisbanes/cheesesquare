@@ -19,6 +19,7 @@ package com.support.android.designlibdemo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -60,6 +61,9 @@ public class CheeseDetailActivity extends AppCompatActivity {
         if (viewPager != null) {
             setupViewPager(viewPager);
         }
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
         loadBackdrop();
     }
