@@ -25,5 +25,7 @@
     the big cheese.</string>
   <string name="checkin">Checkin</string>
   <string name="menu_settings">Settings</string>
+  <string name="open">Open</string>
+  <string name="close">Close</string>
 
 </resources>
