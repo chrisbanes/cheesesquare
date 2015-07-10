@@ -55,7 +55,8 @@
         android:layout_gravity="end|bottom"
         app:borderWidth="0dp"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_done"
         app:layout_behavior="com.support.android.designlibdemo.ScrollAwareFABBehavior" />
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_done" />
 
 </android.support.design.widget.CoordinatorLayout>
