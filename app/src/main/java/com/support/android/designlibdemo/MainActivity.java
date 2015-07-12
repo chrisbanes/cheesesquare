@@ -16,6 +16,7 @@
 
 package com.support.android.designlibdemo;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -37,8 +38,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import rebus.header.view.HeaderInterface;
+import rebus.header.view.HeaderView;
 
 /**
  * TODO
@@ -109,6 +115,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
+        HeaderView headerView = new HeaderView(MainActivity.this);
+        headerView.username("Chris Banes");
+        headerView.email("chris.banes.me");
+        headerView.background().setBackgroundColor(Color.parseColor("#512DA8"));
+        Glide.with(MainActivity.this)
+                .load("https://chris.banes.me/content/images/2015/4/scaffolding.jpg")
+                .asBitmap()
+                .into(headerView.background());
+        Glide.with(MainActivity.this)
+                .load("https://avatars1.githubusercontent.com/u/227486?v=3&s=460")
+                .asBitmap()
+                .into(headerView.avatar());
+        headerView.setOnHeaderClickListener(new HeaderInterface.OnHeaderClickListener() {
+            @Override
+            public void onClick() {
+                mDrawerLayout.closeDrawers();
+            }
+        });
+        navigationView.addHeaderView(headerView);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
             @Override
