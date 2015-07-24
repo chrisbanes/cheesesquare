@@ -52,16 +52,6 @@ public class CheeseDetailActivity extends AppCompatActivity {
         loadBackdrop();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void loadBackdrop() {
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
         Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
