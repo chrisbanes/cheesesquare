@@ -28,15 +28,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_broken_dialog:
+                new AlertDialog.Builder(this).setCancelable(true).setView(R.layout.broken_dialog).show();
+                return true;
+            case R.id.action_fancy_dialog:
+                new AlertDialog.Builder(this).setCancelable(true).setView(R.layout.fancy_dialog).show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

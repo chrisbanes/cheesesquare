@@ -20,4 +20,12 @@
         android:id="@+id/action_settings"
         android:title="@string/menu_settings"
         app:showAsAction="never" />
+  <item
+      android:id="@+id/action_broken_dialog"
+      android:title="Broken Dialog"
+      app:showAsAction="never" />
+  <item
+      android:id="@+id/action_fancy_dialog"
+      android:title="Fancy Dialog"
+      app:showAsAction="never" />
 </menu>
