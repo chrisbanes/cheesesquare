@@ -79,6 +79,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <!-- copied from list_item.xml: added android:transitionName -->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/avatar"
+                        android:layout_width="@dimen/list_item_avatar_size"
+                        android:layout_height="@dimen/list_item_avatar_size"
+                        android:transitionName="sharedImage"
+                        android:layout_marginRight="16dp"/>
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

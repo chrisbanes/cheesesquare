@@ -32,6 +32,8 @@ import java.util.Random;
 public class CheeseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
+    // For duplicating shared element transition image.
+    public static final String EXTRA_DRAWABLE_ID = "drawable_id";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,13 @@ public class CheeseDetailActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(cheeseName);
+
+        // Duplicate shared element transition image.
+        int drawableId = intent.getIntExtra(EXTRA_DRAWABLE_ID, -1);
+        if (drawableId != -1) {
+            final ImageView imageView = (ImageView) findViewById(R.id.avatar);
+            Glide.with(this).load(drawableId).fitCenter().into(imageView);
+        }
 
         loadBackdrop();
     }
