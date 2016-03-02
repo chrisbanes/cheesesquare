@@ -20,11 +20,11 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_dashboard"
-            android:title="Home" />
+            android:title="Map" />
         <item
             android:id="@+id/nav_messages"
             android:icon="@drawable/ic_event"
-            android:title="Messages" />
+            android:title="Tip 1" />
         <item
             android:id="@+id/nav_friends"
             android:icon="@drawable/ic_headset"

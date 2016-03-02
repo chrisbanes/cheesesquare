@@ -21,7 +21,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
@@ -32,6 +31,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.support.android.designlibdemo.model.Category;
+import com.support.android.designlibdemo.model.CategoryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,14 +45,16 @@ public class CheeseListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.fragment_cheese_list, container, false);
-        setupRecyclerView(rv);
+        Bundle bundle = this.getArguments();
+        Category data = bundle.getParcelable("data");
+        setupRecyclerView(rv, data);
         return rv;
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView) {
+    private void setupRecyclerView(RecyclerView recyclerView, Category category) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
-                getRandomSublist(Cheeses.sCheeseStrings, 30)));
+                category.getItems()));
     }
 
     private List<String> getRandomSublist(String[] array, int amount) {
@@ -63,14 +66,24 @@ public class CheeseListFragment extends Fragment {
         return list;
     }
 
-    public static class SimpleStringRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
+    private List<CategoryObject> getCategoryData(int amount) {
+        ArrayList<CategoryObject> list = new ArrayList<>(amount);
+        list.add(new CategoryObject(0, R.drawable.cheese_1, "Sir 1", "To je jedan opak sir"));
+        list.add(new CategoryObject(0, R.drawable.cheese_2, "Sir 2", "To je jedan opak sir"));
+        list.add(new CategoryObject(0, R.drawable.cheese_3, "Sir 3", "To je jedan opak sir"));
+        list.add(new CategoryObject(0, R.drawable.cheese_4, "Trapist", "To je jedan opak sir"));
+        list.add(new CategoryObject(0, R.drawable.cheese_5, "Mocarela", "To je jedan opak sir"));
+
+        return list;
+    }
+
+    public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
 
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
-        private List<String> mValues;
+        private List<CategoryObject> mValues;
 
-        public static class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public String mBoundString;
 
             public final View mView;
@@ -90,11 +103,11 @@ public class CheeseListFragment extends Fragment {
             }
         }
 
-        public String getValueAt(int position) {
+        public CategoryObject getValueAt(int position) {
             return mValues.get(position);
         }
 
-        public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
+        public SimpleStringRecyclerViewAdapter(Context context, List<CategoryObject> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
             mValues = items;
@@ -110,8 +123,8 @@ public class CheeseListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mBoundString = mValues.get(position);
-            holder.mTextView.setText(mValues.get(position));
+            holder.mBoundString = mValues.get(position).getName();
+            holder.mTextView.setText(mValues.get(position).getName());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,7 +138,7 @@ public class CheeseListFragment extends Fragment {
             });
 
             Glide.with(holder.mImageView.getContext())
-                    .load(Cheeses.getRandomCheeseDrawable())
+                    .load(mValues.get(position).getLargeImage())
                     .fitCenter()
                     .into(holder.mImageView);
         }

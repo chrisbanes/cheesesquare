@@ -33,9 +33,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import com.support.android.designlibdemo.model.Category;
+import com.support.android.designlibdemo.model.CategoryContainer;
+import com.support.android.designlibdemo.model.CategoryObject;
+import com.support.android.designlibdemo.model.FinalData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
-
+    private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +69,21 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
-            setupViewPager(viewPager);
+            List<Category> categories = new ArrayList<>();
+
+            ArrayList<CategoryObject> list = new ArrayList<>(5);
+            list.add(new CategoryObject(0, R.drawable.cheese_1, "Sir 1", "To je jedan opak sir"));
+            list.add(new CategoryObject(0, R.drawable.cheese_2, "Sir 2", "To je jedan opak sir"));
+            list.add(new CategoryObject(0, R.drawable.cheese_3, "Sir 3", "To je jedan opak sir"));
+            list.add(new CategoryObject(0, R.drawable.cheese_4, "Trapist", "To je jedan opak sir"));
+            list.add(new CategoryObject(0, R.drawable.cheese_5, "Mocarela", "To je jedan opak sir"));
+
+            categories.add(new Category("KAt 1", list));
+            categories.add(new Category("Kat 2", list));
+            CategoryContainer c = new CategoryContainer("Prva", categories);
+            setupViewPager(viewPager, FinalData.one);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -100,11 +115,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager, CategoryContainer categoryContainer) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new CheeseListFragment(), "Category 1");
-        adapter.addFragment(new CheeseListFragment(), "Category 2");
-        adapter.addFragment(new CheeseListFragment(), "Category 3");
+        for (Category cat : categoryContainer.getCategories()) {
+            CheeseListFragment fragment = new CheeseListFragment();
+            Bundle arguments = new Bundle();
+            arguments.putParcelable("data", cat);
+            fragment.setArguments(arguments);
+            adapter.addFragment(fragment, cat.getName());
+        }
         viewPager.setAdapter(adapter);
     }
 
@@ -113,6 +132,19 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.nav_home:
+                        Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
+                        setupViewPager(viewPager, FinalData.one);
+                        break;
+                    case R.id.nav_messages:
+
+                        break;
+                    case R.id.nav_discussion:
+
+                        break;
+
+                }
                 menuItem.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 return true;
