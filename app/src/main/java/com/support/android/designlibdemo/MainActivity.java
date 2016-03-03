@@ -30,6 +30,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,19 +38,19 @@ import android.widget.Toast;
 
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryContainer;
-import com.support.android.designlibdemo.model.CategoryObject;
 import com.support.android.designlibdemo.model.FinalData;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * TODO
- */
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "CHEEEESE";
 
     private DrawerLayout mDrawerLayout;
     private ViewPager viewPager;
+    private TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Log.d(TAG, "onCreate");
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -69,21 +71,11 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
 
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
-            List<Category> categories = new ArrayList<>();
-
-            ArrayList<CategoryObject> list = new ArrayList<>(5);
-            list.add(new CategoryObject(0, R.drawable.cheese_1, "Sir 1", "To je jedan opak sir"));
-            list.add(new CategoryObject(0, R.drawable.cheese_2, "Sir 2", "To je jedan opak sir"));
-            list.add(new CategoryObject(0, R.drawable.cheese_3, "Sir 3", "To je jedan opak sir"));
-            list.add(new CategoryObject(0, R.drawable.cheese_4, "Trapist", "To je jedan opak sir"));
-            list.add(new CategoryObject(0, R.drawable.cheese_5, "Mocarela", "To je jedan opak sir"));
-
-            categories.add(new Category("KAt 1", list));
-            categories.add(new Category("Kat 2", list));
-            CategoryContainer c = new CategoryContainer("Prva", categories);
-            setupViewPager(viewPager, FinalData.one);
+            setupViewPager(FinalData.two);
+            tabLayout.setupWithViewPager(viewPager);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -95,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -115,7 +105,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager(ViewPager viewPager, CategoryContainer categoryContainer) {
+    private void setupViewPager(CategoryContainer categoryContainer) {
+        Log.d(TAG, "setupViewPager");
+        viewPager.removeAllViews();
         Adapter adapter = new Adapter(getSupportFragmentManager());
         for (Category cat : categoryContainer.getCategories()) {
             CheeseListFragment fragment = new CheeseListFragment();
@@ -134,17 +126,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
                     case R.id.nav_home:
-                        Toast.makeText(MainActivity.this, "home", Toast.LENGTH_SHORT).show();
-                        setupViewPager(viewPager, FinalData.one);
+                        Toast.makeText(MainActivity.this, "Map", Toast.LENGTH_SHORT).show();
+                        setupViewPager(FinalData.one);
                         break;
                     case R.id.nav_messages:
-
+                        Toast.makeText(MainActivity.this, "tip 1", Toast.LENGTH_SHORT).show();
+                        setupViewPager(FinalData.two);
                         break;
                     case R.id.nav_discussion:
 
                         break;
 
                 }
+                tabLayout.setupWithViewPager(viewPager);
                 menuItem.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 return true;
