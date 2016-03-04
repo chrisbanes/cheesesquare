@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.support.android.designlibdemo.activities.CheeseDetailActivity;
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryObject;
 
@@ -45,8 +46,7 @@ public class CheeseListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RecyclerView rv = (RecyclerView) inflater.inflate(
-                R.layout.fragment_cheese_list, container, false);
+        RecyclerView rv = (RecyclerView) inflater.inflate(R.layout.fragment_cheese_list, container, false);
         Bundle bundle = this.getArguments();
         data = bundle.getParcelable("data");
         setupRecyclerView(rv, data);

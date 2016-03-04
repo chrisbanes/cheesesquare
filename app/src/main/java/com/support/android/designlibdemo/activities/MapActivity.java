@@ -1,14 +1,15 @@
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.support.android.designlibdemo.MySingleton;
+import com.support.android.designlibdemo.R;
 import com.support.android.designlibdemo.model.SchoolData;
 
 import org.json.JSONArray;
@@ -109,11 +112,6 @@ public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClick
 
 
     public BitmapDescriptor getMarkerIcon(int type) {
-        Log.e("FUCKING COLOR", ""+ type);
-//        float[] hsv = new float[3];
-//        Color.colorToHSV(Color.parseColor(color), hsv);
-//        BitmapDescriptor bd;
-
         switch (type){
             case 1: return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
             case 2: return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
@@ -137,8 +135,16 @@ public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClick
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
                 {
                     @Override
-                    public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker)
+                    public boolean onMarkerClick(final com.google.android.gms.maps.model.Marker marker)
                     {
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                marker.showInfoWindow();
+
+                            }
+                        }, 400);
                         marker.showInfoWindow();
                         return true;
                     }
@@ -152,9 +158,11 @@ public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClick
     @Override
     public void onInfoWindowClick(Marker marker) {
         SchoolData school = mMarkersHashMap.get(marker);
-        Uri uri = Uri.parse(school.getSite());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        if (URLUtil.isValidUrl(school.getSite())){
+            Uri uri = Uri.parse(school.getSite());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
     }
 
     public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
@@ -183,7 +191,6 @@ public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClick
             Glide.with(getApplicationContext())
                     .load("http://46.101.91.164/skoleproduction/slike/" + school.getImageUrl())
                     .centerCrop()
-                    .placeholder(R.drawable.cheese_1)
                     .crossFade()
                     .into(markerIcon);
 

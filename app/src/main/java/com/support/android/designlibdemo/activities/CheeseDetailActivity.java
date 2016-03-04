@@ -1,21 +1,18 @@
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.activities;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.support.android.designlibdemo.QuestionView;
+import com.support.android.designlibdemo.R;
 import com.support.android.designlibdemo.model.CategoryObject;
 import com.support.android.designlibdemo.model.Question;
 

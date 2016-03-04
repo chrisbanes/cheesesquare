@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.support.android.designlibdemo;
+package com.support.android.designlibdemo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +37,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.support.android.designlibdemo.CheeseListFragment;
+import com.support.android.designlibdemo.R;
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryContainer;
 import com.support.android.designlibdemo.model.FinalData;
