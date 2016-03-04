@@ -40,13 +40,15 @@ import java.util.Random;
 
 public class CheeseListFragment extends Fragment {
 
+    Category data;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.fragment_cheese_list, container, false);
         Bundle bundle = this.getArguments();
-        Category data = bundle.getParcelable("data");
+        data = bundle.getParcelable("data");
         setupRecyclerView(rv, data);
         return rv;
     }
@@ -63,17 +65,6 @@ public class CheeseListFragment extends Fragment {
         while (list.size() < amount) {
             list.add(array[random.nextInt(array.length)]);
         }
-        return list;
-    }
-
-    private List<CategoryObject> getCategoryData(int amount) {
-        ArrayList<CategoryObject> list = new ArrayList<>(amount);
-        list.add(new CategoryObject(0, R.drawable.cheese_1, "Sir 1", "To je jedan opak sir"));
-        list.add(new CategoryObject(0, R.drawable.cheese_2, "Sir 2", "To je jedan opak sir"));
-        list.add(new CategoryObject(0, R.drawable.cheese_3, "Sir 3", "To je jedan opak sir"));
-        list.add(new CategoryObject(0, R.drawable.cheese_4, "Trapist", "To je jedan opak sir"));
-        list.add(new CategoryObject(0, R.drawable.cheese_5, "Mocarela", "To je jedan opak sir"));
-
         return list;
     }
 
@@ -122,9 +113,9 @@ public class CheeseListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mBoundString = mValues.get(position).getName();
-            holder.mTextView.setText(mValues.get(position).getName());
+        public void onBindViewHolder(final ViewHolder holder, final int position) {
+            holder.mBoundString = data.getTitle();
+            holder.mTextView.setText(mValues.get(position).getTitle());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -132,13 +123,14 @@ public class CheeseListFragment extends Fragment {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, CheeseDetailActivity.class);
                     intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.mBoundString);
+                    intent.putExtra(CheeseDetailActivity.EXTRA_DATA, mValues.get(position));
 
                     context.startActivity(intent);
                 }
             });
 
             Glide.with(holder.mImageView.getContext())
-                    .load(mValues.get(position).getLargeImage())
+                    .load(mValues.get(position).getImage())
                     .fitCenter()
                     .into(holder.mImageView);
         }

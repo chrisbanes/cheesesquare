@@ -18,24 +18,24 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_map"
             android:icon="@drawable/ic_dashboard"
-            android:title="Map" />
+            android:title="@string/menu_mapa" />
         <item
-            android:id="@+id/nav_messages"
+            android:id="@+id/nav_young"
             android:icon="@drawable/ic_event"
-            android:title="Tip 1" />
+            android:title="@string/menu_top_mladi" />
         <item
-            android:id="@+id/nav_friends"
+            android:id="@+id/nav_fault"
             android:icon="@drawable/ic_headset"
-            android:title="Friends" />
+            android:title="@string/menu_top_prekrsaji" />
         <item
-            android:id="@+id/nav_discussion"
+            android:id="@+id/nav_active"
             android:icon="@drawable/ic_forum"
-            android:title="Discussion" />
+            android:title="@string/menu_top_aktivizam" />
     </group>
 
-    <item android:title="Sub items">
+    <!--<item android:title="Sub items">
         <menu>
             <item
                 android:icon="@drawable/ic_dashboard"
@@ -44,6 +44,6 @@
                 android:icon="@drawable/ic_forum"
                 android:title="Sub item 2" />
         </menu>
-    </item>
+    </item>-->
 
 </menu>

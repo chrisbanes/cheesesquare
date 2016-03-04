@@ -3,25 +3,44 @@ package com.support.android.designlibdemo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 public class CategoryObject implements Parcelable {
 
-    int smallImage;
-    int largeImage;
-    String name;
-    String description;
+    String title;
+    String fullDescription;
+    int image;
+    List<Question> questions;
+    String linkToWebsite;
 
-    public CategoryObject(int smallImage, int largeImage, String name, String description) {
-        this.smallImage = smallImage;
-        this.largeImage = largeImage;
-        this.name = name;
-        this.description = description;
+    public CategoryObject(String title, String fullDescription, int smallImage, List<Question> questions, String linkToWebsite) {
+        this.title = title;
+        this.fullDescription = fullDescription;
+        this.image = smallImage;
+        this.questions = questions;
+        this.linkToWebsite = linkToWebsite;
     }
 
     protected CategoryObject(Parcel in) {
-        smallImage = in.readInt();
-        largeImage = in.readInt();
-        name = in.readString();
-        description = in.readString();
+        title = in.readString();
+        fullDescription = in.readString();
+        image = in.readInt();
+        questions = in.createTypedArrayList(Question.CREATOR);
+        linkToWebsite = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(fullDescription);
+        dest.writeInt(image);
+        dest.writeTypedList(questions);
+        dest.writeString(linkToWebsite);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<CategoryObject> CREATOR = new Creator<CategoryObject>() {
@@ -36,32 +55,24 @@ public class CategoryObject implements Parcelable {
         }
     };
 
-    public int getSmallImage() {
-        return smallImage;
+    public String getTitle() {
+        return title;
     }
 
-    public int getLargeImage() {
-        return largeImage;
+    public String getFullDescription() {
+        return fullDescription;
     }
 
-    public String getName() {
-        return name;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLinkToWebsite() {
+        return linkToWebsite;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public int getImage() {
+        return image;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(smallImage);
-        dest.writeInt(largeImage);
-        dest.writeString(name);
-        dest.writeString(description);
-    }
 }

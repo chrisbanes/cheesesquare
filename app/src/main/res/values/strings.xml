@@ -25,5 +25,11 @@
     the big cheese.</string>
   <string name="checkin">Checkin</string>
   <string name="menu_settings">Settings</string>
+  <string name="menu_title">Едукација младих у саобраћају</string>
+  <string name="menu_mapa">Интерактивна мапа</string>
+  <string name="menu_top_mladi">Млади у саобраћају</string>
+  <string name="menu_top_prekrsaji">Прекршаји и осигурање</string>
+  <string name="menu_top_aktivizam">Активизам</string>
+  <string name="button_link">Сазнај више на сајту</string>
 
 </resources>

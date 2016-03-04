@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putParcelable("data", cat);
             fragment.setArguments(arguments);
-            adapter.addFragment(fragment, cat.getName());
+            adapter.addFragment(fragment, cat.getTitle());
         }
         viewPager.setAdapter(adapter);
     }
@@ -125,16 +125,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.nav_home:
+                    case R.id.nav_map:
                         Toast.makeText(MainActivity.this, "Map", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_young:
+                        Toast.makeText(MainActivity.this, "tip 1", Toast.LENGTH_SHORT).show();
                         setupViewPager(FinalData.one);
                         break;
-                    case R.id.nav_messages:
-                        Toast.makeText(MainActivity.this, "tip 1", Toast.LENGTH_SHORT).show();
+                    case R.id.nav_fault:
+                        Toast.makeText(MainActivity.this, "tip 2", Toast.LENGTH_SHORT).show();
                         setupViewPager(FinalData.two);
                         break;
-                    case R.id.nav_discussion:
-
+                    case R.id.nav_active:
+                        Toast.makeText(MainActivity.this, "tip 3", Toast.LENGTH_SHORT).show();
+                        setupViewPager(FinalData.three);
                         break;
 
                 }
