@@ -1,7 +1,9 @@
 package com.support.android.designlibdemo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -24,19 +26,20 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.support.android.designlibdemo.model.MarkerData;
+import com.support.android.designlibdemo.model.SchoolData;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MapActivity extends Activity{
+public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
-    private ArrayList<MarkerData> mMarkerDatasArray = new ArrayList<>();
-    private HashMap<Marker, MarkerData> mMarkersHashMap;
+    private ArrayList<SchoolData> mSchoolDatasArray = new ArrayList<>();
+    private HashMap<Marker, SchoolData> mMarkersHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,19 +56,6 @@ public class MapActivity extends Activity{
 
         mMarkersHashMap = new HashMap<>();
 
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Антон Скала' ","Петра Чајковског 21, Савски Венац", "antonskala", Double.parseDouble("44.787583"), Double.parseDouble("20.441149"), "#ff0000","http://www.antonskala.rs/"));
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Војвода Мишић'","Милутина Ивковића 4, Савски Венац", "vojvodamisic", Double.parseDouble("44.786568"), Double.parseDouble("20.448922"),"#ff0000","htpp://www.osvojvodamisic.edu.rs/"));
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Војвода Мишић'","Милутина Ивковића 4, Савски Венац", "vojvodamisic", Double.parseDouble("44.786568"), Double.parseDouble("20.448922"),"#ff0000",""));
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Стефан Немања'","Љубе Јовановића 2а", "stefannemanja", Double.parseDouble("44.791841"), Double.parseDouble("20.443647"),"#ff0000","http://www.ossnemanja.znanje.info"));
-        mMarkerDatasArray.add(new MarkerData("Техничка школа за дизајн коже","Бранкова 17", "tehnickadizajn", Double.parseDouble("44.814977"), Double.parseDouble("20.454049"),"#0000ff","http://www.skoladizajnkoze.edu.rs"));
-        mMarkerDatasArray.add(new MarkerData("Филолошка гимназија","Каменичка 2, Савски Венац", "filoloska", Double.parseDouble("44.812671"), Double.parseDouble("20.456992"),"#0000ff","http://www.filoloska.edu.rs/filoloska"));
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Исидора Секулић'","Гаврила Принципа 42 Савски Венац", "isidorasekulic", Double.parseDouble("44.813933"), Double.parseDouble("20.453892"),"#ff0000","http://www.isidorasekulic.rs"));
-        mMarkerDatasArray.add(new MarkerData("Угоститељско-туристичка школа","Југ Богданова 28,Савски Венац", "ugostiteljskoturisticka", Double.parseDouble("44.814173"), Double.parseDouble("20.454782"),"#0000ff","http://www.ut-skola.znanje.info"));
-        mMarkerDatasArray.add(new MarkerData("Гимназија 'Свети Сава'", "Ресавска 58,Савски Венац", "svsava", Double.parseDouble("44.801235"), Double.parseDouble("20.457811"),"#0000ff","http://www.sveti-sava.edu.rs"));
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Драган Херцог'", "Војводе Миленка33,Савски Венац", "dragance", Double.parseDouble("44.803943"), Double.parseDouble("20.457461"),"#ff0000","http://www.osdrdragangercog.edu.rs"));
-        mMarkerDatasArray.add(new MarkerData("ОШ 'Радојка Лакић'", "Др Александра Костића 1-7", "radojka", Double.parseDouble("44.806508"), Double.parseDouble("20.456568"),"#ff0000","http://www.rlakic.edu.rs"));
-
-
         setUpMap();
 
         LatLng beograd = new LatLng(44.801235, 20.457811);
@@ -73,13 +63,22 @@ public class MapActivity extends Activity{
         mMap.animateCamera(CameraUpdateFactory.zoomTo(13.0f));
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        plotMarkers(mMarkerDatasArray);
+        mMap.setOnInfoWindowClickListener(this);
 
         JsonArrayRequest mapRequest = new JsonArrayRequest(Request.Method.GET, "http://46.101.91.164/skoleproduction/index.php/api/v/2981/", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Log.e("CHEESE", response.toString());
+                for(int i=0; i < response.length(); i++){
+                    try {
+                        JSONObject json = response.getJSONObject(i);
+                        SchoolData school = new SchoolData(json);
+                        mSchoolDatasArray.add(school);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                plotSchools(mSchoolDatasArray);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -91,23 +90,17 @@ public class MapActivity extends Activity{
         MySingleton.getInstance(this).addToRequestQueue(mapRequest);
     }
 
-    private void plotMarkers(ArrayList<MarkerData> markers) {
+    private void plotSchools(ArrayList<SchoolData> markers) {
         if(markers.size() > 0)
         {
-            for (MarkerData MarkerData : markers)
+            for (SchoolData school : markers)
             {
-
                 // Create user marker with custom icon and other options
-                MarkerOptions markerOption = new MarkerOptions().position(new LatLng(MarkerData.getmLatitude(), MarkerData.getmLongitude()));
-                markerOption.icon(getMarkerIcon(MarkerData.getClr()));
-
-              /*  BitmapDescriptor bitmapDescriptor
-                        = BitmapDescriptorFactory.defaultMarker(
-                        BitmapDescriptorFactory.HUE_AZURE); */
-
+                MarkerOptions markerOption = new MarkerOptions().position(new LatLng(school.getLatitude(), school.getLongitude()));
+                markerOption.icon(getMarkerIcon(school.getType()));
 
                 Marker currentMarker = mMap.addMarker(markerOption);
-                mMarkersHashMap.put(currentMarker, MarkerData);
+                mMarkersHashMap.put(currentMarker, school);
 
                 mMap.setInfoWindowAdapter(new MarkerInfoWindowAdapter());
             }
@@ -115,39 +108,19 @@ public class MapActivity extends Activity{
     }
 
 
-    public BitmapDescriptor getMarkerIcon(String color) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(Color.parseColor(color), hsv);
-        return BitmapDescriptorFactory.defaultMarker(hsv[0]);
-    }
+    public BitmapDescriptor getMarkerIcon(int type) {
+        Log.e("FUCKING COLOR", ""+ type);
+//        float[] hsv = new float[3];
+//        Color.colorToHSV(Color.parseColor(color), hsv);
+//        BitmapDescriptor bd;
 
-    private int manageMarkerIcon(String markerIcon)
-    {
-//        if (markerIcon.equals("antonskala"))
-//            return R.drawable.antonskala;
-//        else if(markerIcon.equals("vojvodamisic"))
-//            return R.drawable.vojvodamisic;
-//        else if(markerIcon.equals("stefannemanja"))
-//            return R.drawable.stefannemanja;
-//        else if(markerIcon.equals("tehnickadizajn"))
-//            return R.drawable.tehnickadizajn;
-//        else if(markerIcon.equals("filoloska"))
-//            return R.drawable.filoloska;
-//        else if(markerIcon.equals("isidorasekulic"))
-//            return R.drawable.isidorasekulic;
-//        else if(markerIcon.equals("ugostiteljskoturisticka"))
-//            return R.drawable.ugostiteljskoturisticka;
-//        else if(markerIcon.equals("svsava"))
-//            return R.drawable.svsava;
-//        else if(markerIcon.equals("dragance"))
-//            return R.drawable.dragance;
-//        else if(markerIcon.equals("radojka"))
-//            return R.drawable.radojka;
-//        else
-//            return R.drawable.icondefault;
-        return 0;
+        switch (type){
+            case 1: return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
+            case 2: return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE);
+            case 3: return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN);
+        }
+        return BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED);
     }
-
 
     private void setUpMap()
     {
@@ -175,10 +148,19 @@ public class MapActivity extends Activity{
                 Toast.makeText(getApplicationContext(), "Unable to create Maps", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        SchoolData school = mMarkersHashMap.get(marker);
+        Uri uri = Uri.parse(school.getSite());
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
     public class MarkerInfoWindowAdapter implements GoogleMap.InfoWindowAdapter
     {
-        public MarkerInfoWindowAdapter()
-        {
+        public MarkerInfoWindowAdapter() {
+
         }
 
         @Override
@@ -188,26 +170,27 @@ public class MapActivity extends Activity{
         }
 
         @Override
-        public View getInfoContents(Marker marker)
+        public View getInfoContents(final Marker marker)
         {
-            View v  = getLayoutInflater().inflate(R.layout.question_view, null);
-//            View v  = getLayoutInflater().inflate(R.layout.infowindow_layout, null);
-//
-//            MarkerData MarkerData = mMarkersHashMap.get(marker);
-////
-//            ImageView markerIcon = (ImageView) v.findViewById(R.id.marker_icon);
-//
-//            TextView markerLabel = (TextView)v.findViewById(R.id.marker_label);
-//
-//            TextView markerSajt = (TextView)v.findViewById(R.id.tekst_sajt);
-//
-//            TextView anotherLabel = (TextView)v.findViewById(R.id.another_label);
+            View v  = getLayoutInflater().inflate(R.layout.map_info_window_layout, null);
 
-//            markerIcon.setImageResource(manageMarkerIcon(MarkerData.getmIcon()));
-//
-//            markerLabel.setText(MarkerData.getmLabel());
-//            anotherLabel.setText(MarkerData.getmSnippet());
-//            markerSajt.setText(MarkerData.getSite());
+            SchoolData school = mMarkersHashMap.get(marker);
+            ImageView markerIcon = (ImageView) v.findViewById(R.id.marker_icon);
+            TextView markerLabel = (TextView)v.findViewById(R.id.marker_label);
+            TextView markerSajt = (TextView)v.findViewById(R.id.tekst_sajt);
+            TextView anotherLabel = (TextView)v.findViewById(R.id.another_label);
+
+            Glide.with(getApplicationContext())
+                    .load("http://46.101.91.164/skoleproduction/slike/" + school.getImageUrl())
+                    .centerCrop()
+                    .placeholder(R.drawable.cheese_1)
+                    .crossFade()
+                    .into(markerIcon);
+
+            markerLabel.setText(school.getName());
+            anotherLabel.setText(school.getAddress());
+            markerSajt.setText(school.getSite());
+
             return v;
         }
     }
