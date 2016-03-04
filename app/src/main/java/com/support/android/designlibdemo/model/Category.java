@@ -3,7 +3,6 @@ package com.support.android.designlibdemo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Category implements Parcelable {
@@ -12,12 +11,14 @@ public class Category implements Parcelable {
     String description;
     List<CategoryObject> items;
     List<Question> questions;
+    String linkToSite;
 
-    public Category(String title, String description, List<CategoryObject> items, List<Question> questions) {
+    public Category(String title, String description, List<CategoryObject> items, List<Question> questions, String link) {
         this.title = title;
         this.description = description;
         this.items = items;
         this.questions = questions;
+        this.linkToSite = link;
     }
 
     protected Category(Parcel in) {
@@ -25,6 +26,7 @@ public class Category implements Parcelable {
         description = in.readString();
         items = in.createTypedArrayList(CategoryObject.CREATOR);
         questions = in.createTypedArrayList(Question.CREATOR);
+        linkToSite = in.readString();
     }
 
     @Override
@@ -33,6 +35,7 @@ public class Category implements Parcelable {
         dest.writeString(description);
         dest.writeTypedList(items);
         dest.writeTypedList(questions);
+        dest.writeString(linkToSite);
     }
 
     @Override
@@ -68,4 +71,7 @@ public class Category implements Parcelable {
         return items;
     }
 
+    public String getLinkToSite() {
+        return linkToSite;
+    }
 }

@@ -16,6 +16,7 @@
 
 package com.support.android.designlibdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -127,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.nav_map:
                         Toast.makeText(MainActivity.this, "Map", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.nav_young:
                         Toast.makeText(MainActivity.this, "tip 1", Toast.LENGTH_SHORT).show();
