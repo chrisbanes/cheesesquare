@@ -89,9 +89,27 @@ public class FinalData {
 
     public static final CategoryContainer one = new CategoryContainer("Mladi u saobracaju", Arrays.asList(oneCat1, oneCat2, oneCat3, oneCat4));
 
-    static Category twoCat1 = new Category("Обавезно осигурање путника", "desc", Arrays.asList(o1, o2, o3), Arrays.asList(o1q1, o1q2), null);
-    static Category twoCat2 = new Category("Кривичноправна одговорност", "desc", Arrays.asList(o1), Arrays.asList(o1q1, o1q2), null);
-    static Category twoCat3 = new Category("Неке од казни", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Question o10q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
+    static Question o10q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
+    static Category twoCat1 = new Category("Кривичноправна одговорност", "desc", Arrays.asList(o1), Arrays.asList(o10q1, o10q2), null);
+
+
+    static Question o11q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
+    static Question o11q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
+    static CategoryObject o11 = new CategoryObject("Казне за алкохолисане возаче", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static CategoryObject o12 = new CategoryObject("Новчане казне", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static CategoryObject o13 = new CategoryObject("Казнени поени и висина новчаних казни за поједине прекршаје", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static CategoryObject o14 = new CategoryObject("Искључење возача из саобраћаја", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static CategoryObject o15 = new CategoryObject("Прекршаји санкционисани затворском казном", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static CategoryObject o16 = new CategoryObject("Казне за угрожавање деце", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static CategoryObject o17 = new CategoryObject("Искључење возача из саобраћаја", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
+    static Category twoCat2 = new Category("Неке од казни", "Бла бла бла бла", Arrays.asList(o11, o12,o13,o14,o15,o16,o17), Arrays.asList(o11q1, o11q2), null);
+
+    static Question o12q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
+    static Question o12q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
+    static Category twoCat3 = new Category("Обавезно осигурање путника", "desc", Arrays.asList(o1, o2, o3), Arrays.asList(o1q1, o1q2), null);
+
+
     static Category twoCat4 = new Category("Накнада штете", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
     static Category twoCat5 = new Category("Како наплатити штету", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
 
