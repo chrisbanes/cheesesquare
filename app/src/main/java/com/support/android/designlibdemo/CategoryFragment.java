@@ -18,6 +18,7 @@ package com.support.android.designlibdemo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -28,33 +29,81 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.support.android.designlibdemo.activities.CheeseDetailActivity;
+import com.support.android.designlibdemo.activities.CategoryObjectActivity;
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryObject;
+import com.support.android.designlibdemo.model.Question;
 
 import java.util.List;
 
-public class CheeseListFragment extends Fragment {
+public class CategoryFragment extends Fragment {
 
     Category data;
+
+    RecyclerView rv;
+    TextView description;
+    TextView title;
+    Button link;
+    LinearLayout questions;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RecyclerView rv = (RecyclerView) inflater.inflate(R.layout.fragment_cheese_list, container, false);
+        View root = inflater.inflate(R.layout.category_fragment_layout, container, false);
+        rv = (RecyclerView) root.findViewById(R.id.recyclerview);
+        title = (TextView) root.findViewById(R.id.category_title);
+        description = (TextView) root.findViewById(R.id.category_description);
+        questions = (LinearLayout) root.findViewById(R.id.category_question_container);
+        link = (Button) root.findViewById(R.id.category_link_button);
+
         Bundle bundle = this.getArguments();
         data = bundle.getParcelable("data");
-        Log.d("CATEGORY", data.getTitle());
-        Log.d("CATEGORY", data.getDescription());
-        if (data.getItems() != null) setupRecyclerView(rv, data);
-        return rv;
+        setData();
+        return root;
+    }
+
+    private void setData() {
+        if (data != null) {
+            if (data.getTitle() != null) title.setText(data.getTitle());
+            else title.setVisibility(View.GONE);
+            if (data.getDescription() != null) description.setText(data.getDescription());
+            else description.setVisibility(View.GONE);
+            if (data.getItems() != null) setupRecyclerView(rv, data);
+            else rv.setVisibility(View.GONE);
+
+            if(data.getQuestions() != null){
+                for (Question q : data.getQuestions()){
+                    QuestionView qw = new QuestionView(getActivity());
+                    qw.setValues(q.getQuestion(), q.getAnswer());
+                    questions.addView(qw);
+                }
+            } else {
+                questions.setVisibility(View.GONE);
+            }
+
+            if (data.getLinkToSite() != null){
+                link.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Uri uri = Uri.parse(data.getLinkToSite());
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+                    }
+                });
+            } else {
+                link.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, Category category) {
+        Log.d("CATEGORY O", "setup Recycler");
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(new SimpleRecyclerViewAdapter(getActivity(),
                 category.getItems()));
@@ -113,10 +162,9 @@ public class CheeseListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, CheeseDetailActivity.class);
-                    intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.mBoundString);
-                    intent.putExtra(CheeseDetailActivity.EXTRA_DATA, mValues.get(position));
-
+                    Intent intent = new Intent(context, CategoryObjectActivity.class);
+                    intent.putExtra(CategoryObjectActivity.EXTRA_NAME, holder.mBoundString);
+                    intent.putExtra(CategoryObjectActivity.EXTRA_DATA, mValues.get(position));
                     context.startActivity(intent);
                 }
             });

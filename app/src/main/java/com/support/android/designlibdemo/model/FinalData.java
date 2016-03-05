@@ -168,8 +168,10 @@ public class FinalData {
     static Category threeCat3 = new Category("Анализе","Анализе" ,"desc", Arrays.asList(o34, o35), Arrays.asList(o34q1, o34q2,o35q1, o35q2), null);
 
 
-    static Category threeCat4 = new Category("Занимљивости", "Занимљивости","desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
-    static Category threeCat5 = new Category("Догађаји","Догађаји" ,"desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+
+    
+    static Category threeCat4 = new Category("Занимљивости", "Занимљивости", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category threeCat5 = new Category("Догађаји", null, "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
 
     public static final CategoryContainer three = new CategoryContainer("Aktivizam", Arrays.asList(threeCat1, threeCat2, threeCat3, threeCat4, threeCat5));
 

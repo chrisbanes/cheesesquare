@@ -16,7 +16,7 @@ import com.support.android.designlibdemo.R;
 import com.support.android.designlibdemo.model.CategoryObject;
 import com.support.android.designlibdemo.model.Question;
 
-public class CheeseDetailActivity extends FragmentActivity {
+public class CategoryObjectActivity extends FragmentActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
     public static final String EXTRA_DATA = "detail_data";
@@ -53,25 +53,37 @@ public class CheeseDetailActivity extends FragmentActivity {
         collapsingToolbar.setTitle(cheeseName);*/
 
 //        loadBackdrop();
-        setData();
+        if (detailData != null)  setData();
     }
 
     private void setData() {
-        title.setText(detailData.getTitle());
-        description.setText(detailData.getFullDescription());
-        for (Question q : detailData.getQuestions()){
-            QuestionView qw = new QuestionView(getApplicationContext());
-            qw.setValues(q.getQuestion(), q.getAnswer());
-            questionContainer.addView(qw);
-        }
-        link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(detailData.getLinkToWebsite());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+        if (detailData.getTitle() != null){
+            title.setText(detailData.getTitle());
+        } else title.setVisibility(View.GONE);
+        if (detailData.getFullDescription() != null) description.setText(detailData.getFullDescription());
+        else description.setVisibility(View.GONE);
+        if (detailData.getQuestions() != null) {
+            for (Question q : detailData.getQuestions()){
+                QuestionView qw = new QuestionView(getApplicationContext());
+                qw.setValues(q.getQuestion(), q.getAnswer());
+                questionContainer.addView(qw);
             }
-        });
+        } else {
+            questionContainer.setVisibility(View.GONE);
+        }
+        if (detailData.getLinkToWebsite() != null) {
+
+            link.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uri = Uri.parse(detailData.getLinkToWebsite());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            });
+        } else {
+            link.setVisibility(View.GONE);
+        }
     }
 
     private void loadBackdrop() {

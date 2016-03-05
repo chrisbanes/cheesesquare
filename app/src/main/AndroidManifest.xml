@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.CheeseDetailActivity"
+        <activity android:name=".activities.CategoryObjectActivity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
