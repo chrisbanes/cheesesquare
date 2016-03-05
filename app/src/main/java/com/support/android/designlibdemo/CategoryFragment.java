@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.support.android.designlibdemo.activities.CategoryObjectActivity;
+import com.support.android.designlibdemo.activities.SignsActivity;
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryObject;
 import com.support.android.designlibdemo.model.Question;
@@ -70,7 +71,7 @@ public class CategoryFragment extends Fragment {
 
     private void setData() {
         if (data != null) {
-            if (data.getTitle() != null) title.setText(data.getTitle());
+            if (data.getTextTitle() != null) title.setText(data.getTextTitle());
             else title.setVisibility(View.GONE);
             if (data.getDescription() != null) description.setText(data.getDescription());
             else description.setVisibility(View.GONE);
@@ -162,17 +163,26 @@ public class CategoryFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, CategoryObjectActivity.class);
-                    intent.putExtra(CategoryObjectActivity.EXTRA_NAME, holder.mBoundString);
-                    intent.putExtra(CategoryObjectActivity.EXTRA_DATA, mValues.get(position));
-                    context.startActivity(intent);
+                    if (data.getTitle().toLowerCase().equals("знакови")){
+                        Intent intent = new Intent(context, SignsActivity.class);
+                        intent.putExtra("sign", mValues.get(position).getSign());
+                        context.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(context, CategoryObjectActivity.class);
+                        intent.putExtra(CategoryObjectActivity.EXTRA_NAME, holder.mBoundString);
+                        intent.putExtra(CategoryObjectActivity.EXTRA_DATA, mValues.get(position));
+                        context.startActivity(intent);
+                    }
                 }
             });
-
-            Glide.with(holder.mImageView.getContext())
-                    .load(mValues.get(position).getImage())
-                    .fitCenter()
-                    .into(holder.mImageView);
+            if (mValues.get(position).getImage() != 0){
+                Glide.with(holder.mImageView.getContext())
+                        .load(mValues.get(position).getImage())
+                        .fitCenter()
+                        .into(holder.mImageView);
+            } else {
+                holder.mImageView.setVisibility(View.GONE);
+            }
         }
 
         @Override

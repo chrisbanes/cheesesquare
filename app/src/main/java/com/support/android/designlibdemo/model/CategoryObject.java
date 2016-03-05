@@ -12,6 +12,7 @@ public class CategoryObject implements Parcelable {
     int image;
     List<Question> questions;
     String linkToWebsite;
+    Sign sign;
 
     public CategoryObject(String title, String fullDescription, int smallImage, List<Question> questions, String linkToWebsite) {
         this.title = title;
@@ -21,12 +22,22 @@ public class CategoryObject implements Parcelable {
         this.linkToWebsite = linkToWebsite;
     }
 
+    public CategoryObject(String title, String fullDescription, int smallImage, List<Question> questions, String linkToWebsite, Sign sign) {
+        this.title = title;
+        this.fullDescription = fullDescription;
+        this.image = smallImage;
+        this.questions = questions;
+        this.linkToWebsite = linkToWebsite;
+        this.sign = sign;
+    }
+
     protected CategoryObject(Parcel in) {
         title = in.readString();
         fullDescription = in.readString();
         image = in.readInt();
         questions = in.createTypedArrayList(Question.CREATOR);
         linkToWebsite = in.readString();
+        sign = in.readParcelable(Sign.class.getClassLoader());
     }
 
     @Override
@@ -36,6 +47,7 @@ public class CategoryObject implements Parcelable {
         dest.writeInt(image);
         dest.writeTypedList(questions);
         dest.writeString(linkToWebsite);
+        dest.writeParcelable(sign, flags);
     }
 
     @Override
@@ -73,6 +85,10 @@ public class CategoryObject implements Parcelable {
 
     public int getImage() {
         return image;
+    }
+
+    public Sign getSign() {
+        return sign;
     }
 
 }

@@ -132,10 +132,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    boolean drawerOpened = false;
     @Override
     protected void onResume() {
         super.onResume();
-        mDrawerLayout.openDrawer(GravityCompat.START);
+        if (!drawerOpened) mDrawerLayout.openDrawer(GravityCompat.START);
+        drawerOpened = true;
     }
 
     private void setupViewPager(ViewPager viewPager, CategoryContainer categoryContainer, Adapter adapter) {
@@ -193,7 +195,8 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.nav_map:
-                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                                Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
+//                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
                                 break;
                             case R.id.nav_young:

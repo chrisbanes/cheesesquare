@@ -45,14 +45,6 @@ public class CategoryObjectActivity extends FragmentActivity {
         questionContainer = (LinearLayout) findViewById(R.id.question_container);
         link = (Button) findViewById(R.id.link_button);
 
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        /*CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbar.setTitle(cheeseName);*/
-
-//        loadBackdrop();
         if (detailData != null)  setData();
     }
 
@@ -86,14 +78,4 @@ public class CategoryObjectActivity extends FragmentActivity {
         }
     }
 
-    private void loadBackdrop() {
-//        final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
-//        Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.sample_actions, menu);
-        return true;
-    }
 }
