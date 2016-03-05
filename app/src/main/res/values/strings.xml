@@ -30,6 +30,8 @@
   <string name="menu_top_mladi">Млади у саобраћају</string>
   <string name="menu_top_prekrsaji">Прекршаји и осигурање</string>
   <string name="menu_top_aktivizam">Активизам</string>
+  <string name="menu_top_upitnik1">Упитник - млади</string>
+  <string name="menu_top_upitnik2">Упитник - прекршаји и осигурање</string>
   <string name="button_link">Сазнај више на сајту</string>
 
 </resources>

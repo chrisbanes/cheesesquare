@@ -1,7 +1,6 @@
 package com.support.android.designlibdemo.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +19,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.support.android.designlibdemo.MySingleton;
 import com.support.android.designlibdemo.R;
-import com.support.android.designlibdemo.model.CategoryObject;
 import com.support.android.designlibdemo.model.SurveyQuestion;
 
 import org.json.JSONException;
@@ -32,12 +30,8 @@ import java.util.List;
 
 public class SurveyActivity extends FragmentActivity {
 
-    public static final String EXTRA_DATA = "detail_data";
+    String type;
 
-    CategoryObject detailData;
-
-    TextView title;
-    TextView description;
     Button link;
     LinearLayout surveyContainer;
 
@@ -48,24 +42,31 @@ public class SurveyActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.survey_activity);
 
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        surveyContainer = (LinearLayout) findViewById(R.id.topContainer);
+
         SurveyQuestion s1 = new SurveyQuestion("Године старости:", Arrays.asList("мање од 18 година", "између 18-25", "између 25-35"));
         SurveyQuestion s2 = new SurveyQuestion("Да ли су учесници у саобраћају само возачи?", Arrays.asList("Да", "не, и возачи и пешаци", "не знам"));
         SurveyQuestion s3 = new SurveyQuestion("Регулисање саобраћаја у зони школе могу вршити:", Arrays.asList("саобраћајне патроле", "саобраћајне патроле и саобраћајне патроле грађана", "не знам"));
         SurveyQuestion s4 = new SurveyQuestion("Године старости:", Arrays.asList("мање од 18 година", "између 18-25", "између 25-35"));
         // todo dodaj ostale
 
-        survey.add(s1);
-        survey.add(s2);
-        survey.add(s3);
-        survey.add(s4);
+         // todo ovaj napravi sam po sablonu od ovog starog za prekrsaje i dole dodas
 
         Intent intent = getIntent();
-        detailData = intent.getParcelableExtra(EXTRA_DATA);
+        type = intent.getExtras().getString("type");
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Упитник");
-
-        surveyContainer = (LinearLayout) findViewById(R.id.topContainer);
+        if (type != null && type.equals("young")){
+            toolbar.setTitle("Упитник - млади");
+            survey.add(s1);
+            survey.add(s2);
+            survey.add(s3);
+            survey.add(s4);
+        } else {
+            toolbar.setTitle("Упитник - прекршаји и осигурање");
+            survey.add(s1); // todo ovo promeni
+        }
         link = (Button) findViewById(R.id.survey_button);
         link.setText("Пошаљи одговоре");
 
@@ -94,7 +95,13 @@ public class SurveyActivity extends FragmentActivity {
             public void onClick(View v) {
                 // todo send answers
                 JSONObject json = new JSONObject();
-                for (int i= 0; i< survey.size(); i++){
+                 try {
+                     if (type.equals("young")) json.put("tipankete", "mladi");
+                     else json.put("tipankete", "prekrsaji");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i< survey.size(); i++){
                     SurveyQuestion sq = survey.get(i);
                     View view = surveyContainer.findViewWithTag(sq);
                     RadioButton rb1 = (RadioButton) view.findViewById(R.id.answer_one);
@@ -119,7 +126,7 @@ public class SurveyActivity extends FragmentActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                JsonObjectRequest surveyRequest = new JsonObjectRequest(Request.Method.GET, "http://46.101.91.164/skoleproduction/index.php/api/anketa", json, new Response.Listener<JSONObject>() {
+                JsonObjectRequest surveyRequest = new JsonObjectRequest(Request.Method.POST, "http://46.101.91.164/skoleproduction/index.php/api/anketa", json, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Toast.makeText(getApplicationContext(), "Хвала на учешћу!", Toast.LENGTH_SHORT).show();

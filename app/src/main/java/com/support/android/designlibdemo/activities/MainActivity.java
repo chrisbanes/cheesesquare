@@ -195,8 +195,7 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()){
                             case R.id.nav_map:
-                                Intent intent = new Intent(MainActivity.this, SurveyActivity.class);
-//                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
                                 startActivity(intent);
                                 break;
                             case R.id.nav_young:
@@ -210,6 +209,16 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.nav_active:
                                 Toast.makeText(MainActivity.this, "tip 3", Toast.LENGTH_SHORT).show();
                                 setViewPagerVisibility(viewPager3);
+                                break;
+                            case R.id.nav_survey_young:
+                                Intent intent2 = new Intent(MainActivity.this, SurveyActivity.class);
+                                intent2.putExtra("type", "young");
+                                startActivity(intent2);
+                                break;
+                            case R.id.nav_survey_fault:
+                                Intent intent3 = new Intent(MainActivity.this, SurveyActivity.class);
+                                intent3.putExtra("type", "fault");
+                                startActivity(intent3);
                                 break;
                         }
                         menuItem.setChecked(true);

@@ -26,9 +26,17 @@
             android:icon="@drawable/ic_ikonaaaa"
             android:title="@string/menu_top_mladi" />
         <item
+            android:id="@+id/nav_survey_young"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_upitnik1" />
+        <item
             android:id="@+id/nav_fault"
             android:icon="@drawable/ic_prekrsajiiosiguranje"
             android:title="@string/menu_top_prekrsaji" />
+        <item
+            android:id="@+id/nav_survey_fault"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_upitnik2" />
         <item
             android:id="@+id/nav_active"
             android:icon="@drawable/ic_aktivizaam"
