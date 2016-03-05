@@ -8,13 +8,15 @@ import java.util.List;
 public class Category implements Parcelable {
 
     String title;
+    String textTitle;
     String description;
     List<CategoryObject> items;
     List<Question> questions;
     String linkToSite;
 
-    public Category(String title, String description, List<CategoryObject> items, List<Question> questions, String link) {
+    public Category(String title, String textTitle, String description, List<CategoryObject> items, List<Question> questions, String link) {
         this.title = title;
+        this.textTitle = textTitle;
         this.description = description;
         this.items = items;
         this.questions = questions;
@@ -23,6 +25,7 @@ public class Category implements Parcelable {
 
     protected Category(Parcel in) {
         title = in.readString();
+        textTitle = in.readString();
         description = in.readString();
         items = in.createTypedArrayList(CategoryObject.CREATOR);
         questions = in.createTypedArrayList(Question.CREATOR);
@@ -32,6 +35,7 @@ public class Category implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
+        dest.writeString(textTitle);
         dest.writeString(description);
         dest.writeTypedList(items);
         dest.writeTypedList(questions);
@@ -57,6 +61,10 @@ public class Category implements Parcelable {
 
     public String getTitle() {
         return title;
+    }
+
+    public String getTextTitle() {
+        return textTitle;
     }
 
     public String getDescription() {

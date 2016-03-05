@@ -35,7 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.support.android.designlibdemo.CheeseListFragment;
+import com.support.android.designlibdemo.CategoryFragment;
 import com.support.android.designlibdemo.R;
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryContainer;
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "setupViewPager - " + categoryContainer.getName());
         adapter = new Adapter(getSupportFragmentManager());
         for (Category cat : categoryContainer.getCategories()) {
-            CheeseListFragment fragment = new CheeseListFragment();
+            CategoryFragment fragment = new CategoryFragment();
             Bundle arguments = new Bundle();
             arguments.putParcelable("data", cat);
             fragment.setArguments(arguments);
