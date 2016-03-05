@@ -83,6 +83,7 @@ public class FinalData {
 
     static Category oneCat2 = new Category("Безбедно понашање", "desc", Arrays.asList(o4,o5,o6,o7,o8,o9), Arrays.asList(o4q1, o4q2,o5q1,o5q2,o6q1,o6q2,o7q1,o7q2,o8q1,o9q1,o9q2), null);
 
+
     static Category oneCat3 = new Category("Знакови", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
 
     static Category oneCat4 = new Category("Упитник", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
@@ -91,7 +92,7 @@ public class FinalData {
 
     static Question o10q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o10q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
-    static Category twoCat1 = new Category("Кривичноправна одговорност", "desc", Arrays.asList(o1), Arrays.asList(o10q1, o10q2), null);
+    static Category twoCat1 = new Category("Кривичноправна одговорност", "desc", null, Arrays.asList(o10q1, o10q2), null);
 
 
     static Question o11q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
@@ -107,7 +108,7 @@ public class FinalData {
 
     static Question o12q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o12q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
-    static Category twoCat3 = new Category("Обавезно осигурање путника", "desc", Arrays.asList(o1, o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category twoCat3 = new Category("Обавезно осигурање путника", "desc", null, Arrays.asList(o1q1, o1q2), null);
 
 
     static Category twoCat4 = new Category("Накнада штете", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);

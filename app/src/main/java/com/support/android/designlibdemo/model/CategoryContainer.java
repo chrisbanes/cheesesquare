@@ -20,6 +20,17 @@ public class CategoryContainer implements Parcelable {
         categories = in.createTypedArrayList(Category.CREATOR);
     }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeTypedList(categories);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
     public static final Creator<CategoryContainer> CREATOR = new Creator<CategoryContainer>() {
         @Override
         public CategoryContainer createFromParcel(Parcel in) {
@@ -40,14 +51,4 @@ public class CategoryContainer implements Parcelable {
         return categories;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeTypedList(categories);
-    }
 }

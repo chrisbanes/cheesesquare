@@ -18,13 +18,11 @@ package com.support.android.designlibdemo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -51,8 +49,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "CHEEEESE";
 
     private DrawerLayout mDrawerLayout;
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    private ViewPager viewPager1;
+    private ViewPager viewPager2;
+    private ViewPager viewPager3;
+    private TabLayout tabLayout1;
+    private TabLayout tabLayout2;
+    private TabLayout tabLayout3;
+
+    Adapter adapter;
+    Adapter adapter2;
+    Adapter adapter3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,21 +80,39 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        viewPager = (ViewPager) findViewById(R.id.viewpager);
-        if (viewPager != null) {
-            setupViewPager(FinalData.two);
-            tabLayout.setupWithViewPager(viewPager);
-        }
+        tabLayout1 = (TabLayout) findViewById(R.id.tabs1);
+        tabLayout2 = (TabLayout) findViewById(R.id.tabs2);
+        tabLayout3 = (TabLayout) findViewById(R.id.tabs3);
+        viewPager1 = (ViewPager) findViewById(R.id.viewpager1);
+        viewPager2 = (ViewPager) findViewById(R.id.viewpager2);
+        viewPager3 = (ViewPager) findViewById(R.id.viewpager3);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        if (viewPager1 != null) {
+            setupViewPager(viewPager1, FinalData.one, adapter);
+            tabLayout1.setupWithViewPager(viewPager1);
+//        }
+//        if (viewPager2 != null) {
+            setupViewPager(viewPager2, FinalData.two, adapter2);
+            tabLayout2.setupWithViewPager(viewPager2);
+//        }
+//        if (viewPager3 != null) {
+            setupViewPager(viewPager3, FinalData.three, adapter3);
+            tabLayout3.setupWithViewPager(viewPager3);
+//        }
+
+        viewPager2.setVisibility(View.GONE);
+        viewPager3.setVisibility(View.GONE);
+        tabLayout2.setVisibility(View.GONE);
+        tabLayout3.setVisibility(View.GONE);
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
     }
 
@@ -108,10 +132,15 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager(CategoryContainer categoryContainer) {
-        Log.d(TAG, "setupViewPager");
-        viewPager.removeAllViews();
-        Adapter adapter = new Adapter(getSupportFragmentManager());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mDrawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    private void setupViewPager(ViewPager viewPager, CategoryContainer categoryContainer, Adapter adapter) {
+        Log.d(TAG, "setupViewPager - " + categoryContainer.getName());
+        adapter = new Adapter(getSupportFragmentManager());
         for (Category cat : categoryContainer.getCategories()) {
             CheeseListFragment fragment = new CheeseListFragment();
             Bundle arguments = new Bundle();
@@ -122,42 +151,74 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
+    private void setViewPagerVisibility(ViewPager vp) {
+        switch (vp.getId()){
+            case R.id.viewpager1: {
+                Log.e("????", "first");
+                viewPager1.setVisibility(View.VISIBLE);
+                viewPager2.setVisibility(View.GONE);
+                viewPager3.setVisibility(View.GONE);
+                tabLayout1.setVisibility(View.VISIBLE);
+                tabLayout2.setVisibility(View.GONE);
+                tabLayout3.setVisibility(View.GONE);
+                break;
+            }
+            case R.id.viewpager2: {
+                Log.e("????", "second");
+                viewPager1.setVisibility(View.GONE);
+                viewPager2.setVisibility(View.VISIBLE);
+                viewPager3.setVisibility(View.GONE);
+                tabLayout1.setVisibility(View.GONE);
+                tabLayout2.setVisibility(View.VISIBLE);
+                tabLayout3.setVisibility(View.GONE);
+                break;
+            }
+            case R.id.viewpager3: {
+                Log.e("????", "third");
+                viewPager1.setVisibility(View.GONE);
+                viewPager2.setVisibility(View.GONE);
+                viewPager3.setVisibility(View.VISIBLE);
+                tabLayout1.setVisibility(View.GONE);
+                tabLayout2.setVisibility(View.GONE);
+                tabLayout3.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
+    }
+
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                switch (menuItem.getItemId()){
-                    case R.id.nav_map:
-                        Toast.makeText(MainActivity.this, "Map", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.nav_young:
-                        Toast.makeText(MainActivity.this, "tip 1", Toast.LENGTH_SHORT).show();
-                        setupViewPager(FinalData.one);
-                        break;
-                    case R.id.nav_fault:
-                        Toast.makeText(MainActivity.this, "tip 2", Toast.LENGTH_SHORT).show();
-                        setupViewPager(FinalData.two);
-                        break;
-                    case R.id.nav_active:
-                        Toast.makeText(MainActivity.this, "tip 3", Toast.LENGTH_SHORT).show();
-                        setupViewPager(FinalData.three);
-                        break;
-
-                }
-                tabLayout.setupWithViewPager(viewPager);
-                menuItem.setChecked(true);
-                mDrawerLayout.closeDrawers();
-                return true;
-            }
-        });
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        switch (menuItem.getItemId()){
+                            case R.id.nav_map:
+                                Intent intent = new Intent(MainActivity.this, MapActivity.class);
+                                startActivity(intent);
+                                break;
+                            case R.id.nav_young:
+                                Toast.makeText(MainActivity.this, "tip 1", Toast.LENGTH_SHORT).show();
+                                setViewPagerVisibility(viewPager1);
+                                break;
+                            case R.id.nav_fault:
+                                Toast.makeText(MainActivity.this, "tip 2", Toast.LENGTH_SHORT).show();
+                                setViewPagerVisibility(viewPager2);
+                                break;
+                            case R.id.nav_active:
+                                Toast.makeText(MainActivity.this, "tip 3", Toast.LENGTH_SHORT).show();
+                                setViewPagerVisibility(viewPager3);
+                                break;
+                        }
+                        menuItem.setChecked(true);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
     }
 
-    static class Adapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragments = new ArrayList<>();
-        private final List<String> mFragmentTitles = new ArrayList<>();
+    static class Adapter extends FragmentStatePagerAdapter {
+        private List<Fragment> mFragments = new ArrayList<>();
+        private List<String> mFragmentTitles = new ArrayList<>();
 
         public Adapter(FragmentManager fm) {
             super(fm);
@@ -171,6 +232,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             return mFragments.get(position);
+        }
+
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
 
         @Override

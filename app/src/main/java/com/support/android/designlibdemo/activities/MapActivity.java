@@ -87,7 +87,6 @@ public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClick
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.e("MAP CHEESE", error.getMessage());
             }
         });
         MySingleton.getInstance(this).addToRequestQueue(mapRequest);
@@ -144,7 +143,7 @@ public class MapActivity extends Activity implements GoogleMap.OnInfoWindowClick
                                 marker.showInfoWindow();
 
                             }
-                        }, 400);
+                        }, 600);
                         marker.showInfoWindow();
                         return true;
                     }

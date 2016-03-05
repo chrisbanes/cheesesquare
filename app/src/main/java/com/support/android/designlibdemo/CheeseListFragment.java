@@ -23,6 +23,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +36,7 @@ import com.support.android.designlibdemo.activities.CheeseDetailActivity;
 import com.support.android.designlibdemo.model.Category;
 import com.support.android.designlibdemo.model.CategoryObject;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CheeseListFragment extends Fragment {
 
@@ -49,26 +48,19 @@ public class CheeseListFragment extends Fragment {
         RecyclerView rv = (RecyclerView) inflater.inflate(R.layout.fragment_cheese_list, container, false);
         Bundle bundle = this.getArguments();
         data = bundle.getParcelable("data");
-        setupRecyclerView(rv, data);
+        Log.d("CATEGORY", data.getTitle());
+        Log.d("CATEGORY", data.getDescription());
+        if (data.getItems() != null) setupRecyclerView(rv, data);
         return rv;
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, Category category) {
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
+        recyclerView.setAdapter(new SimpleRecyclerViewAdapter(getActivity(),
                 category.getItems()));
     }
 
-    private List<String> getRandomSublist(String[] array, int amount) {
-        ArrayList<String> list = new ArrayList<>(amount);
-        Random random = new Random();
-        while (list.size() < amount) {
-            list.add(array[random.nextInt(array.length)]);
-        }
-        return list;
-    }
-
-    public class SimpleStringRecyclerViewAdapter extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
+    public class SimpleRecyclerViewAdapter extends RecyclerView.Adapter<SimpleRecyclerViewAdapter.ViewHolder> {
 
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
@@ -98,7 +90,7 @@ public class CheeseListFragment extends Fragment {
             return mValues.get(position);
         }
 
-        public SimpleStringRecyclerViewAdapter(Context context, List<CategoryObject> items) {
+        public SimpleRecyclerViewAdapter(Context context, List<CategoryObject> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
             mValues = items;
