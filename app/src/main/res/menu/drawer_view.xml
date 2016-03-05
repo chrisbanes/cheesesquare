@@ -19,19 +19,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/ic_dashboard"
+            android:icon="@drawable/ic_interaktivna"
             android:title="@string/menu_mapa" />
         <item
             android:id="@+id/nav_young"
-            android:icon="@drawable/ic_event"
+            android:icon="@drawable/ic_ikonaaaa"
             android:title="@string/menu_top_mladi" />
         <item
             android:id="@+id/nav_fault"
-            android:icon="@drawable/ic_headset"
+            android:icon="@drawable/ic_prekrsajiiosiguranje"
             android:title="@string/menu_top_prekrsaji" />
         <item
             android:id="@+id/nav_active"
-            android:icon="@drawable/ic_forum"
+            android:icon="@drawable/ic_aktivizaam"
             android:title="@string/menu_top_aktivizam" />
     </group>
 
