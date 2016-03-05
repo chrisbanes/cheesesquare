@@ -16,7 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">Cheesesquare</string>
+    <string name="app_name">Млади у саобраћају</string>
 
   <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
@@ -25,5 +25,14 @@
     the big cheese.</string>
   <string name="checkin">Checkin</string>
   <string name="menu_settings">Settings</string>
+  <string name="menu_title">Едукација младих у саобраћају</string>
+  <string name="menu_mapa">Интерактивна мапа</string>
+  <string name="menu_top_mladi">Млади у саобраћају</string>
+  <string name="menu_top_prekrsaji">Прекршаји и осигурање</string>
+  <string name="menu_top_aktivizam">Активизам</string>
+  <string name="menu_top_upitnik1">Упитник - млади</string>
+  <string name="menu_top_upitnik2">Упитник - прекршаји и осигурање</string>
+  <string name="menu_top_quiz">Квиз</string>
+  <string name="button_link">Сазнај више на сајту</string>
 
 </resources>

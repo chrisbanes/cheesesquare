@@ -15,7 +15,7 @@
   ~ limitations under the License.
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo">
     </style>
@@ -35,4 +35,8 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+    <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAllCaps" tools:targetApi="ice_cream_sandwich">true</item>
+    </style>
 </resources>

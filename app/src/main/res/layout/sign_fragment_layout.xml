@@ -88,35 +88,17 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:text="Info"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                    <TextView
-                        android:id="@+id/description"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/cheese_ipsum" />
+                        android:id="@+id/sign_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
-                        android:id="@+id/question_container"
+                        android:id="@+id/signs_container"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="vertical">
 
                     </LinearLayout>
-
-                    <Button
-                        android:id="@+id/link_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:text="@string/button_link"
-                        android:layout_gravity="center"/>
 
                 </LinearLayout>
 
@@ -126,14 +108,5 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
-
-    <!--<android.support.design.widget.FloatingActionButton
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_discuss"
-        android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"/>-->
 
 </android.support.design.widget.CoordinatorLayout>

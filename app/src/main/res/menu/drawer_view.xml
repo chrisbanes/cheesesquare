@@ -18,24 +18,36 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_dashboard"
-            android:title="Home" />
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_interaktivna"
+            android:title="@string/menu_mapa" />
         <item
-            android:id="@+id/nav_messages"
-            android:icon="@drawable/ic_event"
-            android:title="Messages" />
+            android:id="@+id/nav_young"
+            android:icon="@drawable/ic_ikonaaaa"
+            android:title="@string/menu_top_mladi" />
         <item
-            android:id="@+id/nav_friends"
-            android:icon="@drawable/ic_headset"
-            android:title="Friends" />
+            android:id="@+id/nav_quiz"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_quiz" />
         <item
-            android:id="@+id/nav_discussion"
-            android:icon="@drawable/ic_forum"
-            android:title="Discussion" />
+            android:id="@+id/nav_survey_young"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_upitnik1" />
+        <item
+            android:id="@+id/nav_fault"
+            android:icon="@drawable/ic_prekrsajiiosiguranje"
+            android:title="@string/menu_top_prekrsaji" />
+        <item
+            android:id="@+id/nav_survey_fault"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_upitnik2" />
+        <item
+            android:id="@+id/nav_active"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_aktivizam" />
     </group>
 
-    <item android:title="Sub items">
+    <!--<item android:title="Sub items">
         <menu>
             <item
                 android:icon="@drawable/ic_dashboard"
@@ -44,6 +56,6 @@
                 android:icon="@drawable/ic_forum"
                 android:title="Sub item 2" />
         </menu>
-    </item>
+    </item>-->
 
 </menu>
