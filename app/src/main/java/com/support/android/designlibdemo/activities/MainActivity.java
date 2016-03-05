@@ -220,6 +220,10 @@ public class MainActivity extends AppCompatActivity {
                                 intent3.putExtra("type", "fault");
                                 startActivity(intent3);
                                 break;
+                            case R.id.nav_quiz:
+                                Intent intent4 = new Intent(MainActivity.this, QuizActivity.class);
+                                startActivity(intent4);
+                                break;
                         }
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();

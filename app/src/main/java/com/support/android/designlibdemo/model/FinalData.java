@@ -152,8 +152,11 @@ public class FinalData {
 
     static Category oneCat2 = new Category("Безбедно понашање","Безбедно понашање", "desc", Arrays.asList(o4,o5,o6,o7,o8,o9), Arrays.asList(o4q1, o4q2,o6q1,o6q2,o7q1,o7q2,o8q1), null);
 
-    static Sign s1 = new Sign("Знакови опасности", Arrays.asList(R.drawable.cheese_1, R.drawable.cheese_2), Arrays.asList("Prvi znak", "Drugi znak"));
-    static Sign s2 = new Sign("Знакови опасности", Arrays.asList(R.drawable.cheese_1, R.drawable.cheese_2), Arrays.asList("Prvi znak", "Drugi znak"));
+ // todo pazi da ima isti broj slika i description-a
+    static int[] im1 = {R.drawable.cheese_1, R.drawable.cheese_2};
+    static int[] im2 = {R.drawable.cheese_1, R.drawable.cheese_3};
+    static Sign s1 = new Sign("Знакови опасности", im1, Arrays.asList("Prvi znak", "Drugi znak"));
+    static Sign s2 = new Sign("Знакови опасности", im2, Arrays.asList("Prvi znak", "Drugi znak"));
 
     static CategoryObject z1 = new CategoryObject("Знакови опасности", null, 0, null, null, s1);
     static CategoryObject z2 = new CategoryObject("Знакови изричитих наредби", null, 0, null, null, s2);

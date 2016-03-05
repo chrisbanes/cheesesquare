@@ -26,6 +26,10 @@
             android:icon="@drawable/ic_ikonaaaa"
             android:title="@string/menu_top_mladi" />
         <item
+            android:id="@+id/nav_quiz"
+            android:icon="@drawable/ic_aktivizaam"
+            android:title="@string/menu_top_quiz" />
+        <item
             android:id="@+id/nav_survey_young"
             android:icon="@drawable/ic_aktivizaam"
             android:title="@string/menu_top_upitnik1" />

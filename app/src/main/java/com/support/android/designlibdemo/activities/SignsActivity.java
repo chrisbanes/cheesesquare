@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -38,21 +39,22 @@ public class SignsActivity extends FragmentActivity {
     }
 
     private void setData() {
-        if (data != null) {
             if (data.getTitle() != null) title.setText(data.getTitle());
             else title.setVisibility(View.GONE);
             if (data.getImages() != null) {
-                for (int i=0; i<data.getImages().size(); i++) {
+                Log.d("SIGNS", "not null");
+                for (int i=0; i<data.getImages().length; i++) {
+                    Log.d("SIGNS", "i");
                     LayoutInflater inflater = LayoutInflater.from(this);
                     View sign = inflater.inflate(R.layout.sign_item, null);
                     TextView tv = (TextView) sign.findViewById(R.id.sign_description);
                     tv.setText(data.getImageDescriptions().get(i));
                     ImageView iv = (ImageView) sign.findViewById(R.id.sign_image);
-                    iv.setImageDrawable(ContextCompat.getDrawable(this, data.getImages().get(i)));
+                    iv.setImageDrawable(ContextCompat.getDrawable(this, data.getImages()[i]));
                     signs.addView(sign);
                 }
             }
-        }
+
     }
 
 }

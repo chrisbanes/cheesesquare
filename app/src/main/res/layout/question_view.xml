@@ -26,7 +26,13 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true" />
+            android:layout_alignParentRight="true"
+            android:textOn="-"
+            android:textOff="+"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/black"/>
     </RelativeLayout>
 
     <TextView
