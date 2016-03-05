@@ -52,12 +52,12 @@ public class FinalData {
 //    static CategoryObject o4 = new CategoryObject(R.drawable.cheese_4, R.drawable.cheese_4, "Budjavi sir", "desc");
 //    static CategoryObject o5 = new CategoryObject(0, R.drawable.cheese_5, "Mocarela", "To je jedan opak sir");
 
-    static Category oneCat1 = new Category("За младе возаче", "desc", Arrays.asList(o1, o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category oneCat1 = new Category("За младе возаче","За младе возаче" ,"desc", Arrays.asList(o1, o2, o3), Arrays.asList(o1q1, o1q2), null);
 
 
     static Question o4q1 = new Question("Желите да сазнате који су стадијуми алкохолизма? ", "Има их шест и иду од стања пролазне опијености до коматозног стања.");
     static Question o4q2 = new Question("Желите да сазнате на које све органе делује алкохол?", "Он првенствено делује на мозак, десни, плућа, руке, јетру, ноге, изазива болове у стомаку, бубрезима, желуцу, срцу итд.");
-    static CategoryObject o4 = new CategoryObject("Утицај алкохола", "....",R.drawable.cheese_1, Arrays.asList(o4q1, o4q2), "http://www.nesto.com");
+    static CategoryObject o4 = new CategoryObject("Утицај алкохола" ,"....",R.drawable.cheese_1, Arrays.asList(o4q1, o4q2), "http://www.nesto.com");
 
     static Question o5q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o5q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
@@ -81,18 +81,18 @@ public class FinalData {
     static Question o9q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
     static CategoryObject o9 = new CategoryObject("Алкометар", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
 
-    static Category oneCat2 = new Category("Безбедно понашање", "desc", Arrays.asList(o4,o5,o6,o7,o8,o9), Arrays.asList(o4q1, o4q2,o5q1,o5q2,o6q1,o6q2,o7q1,o7q2,o8q1,o9q1,o9q2), null);
+    static Category oneCat2 = new Category("Безбедно понашање","Безбедно понашање", "desc", Arrays.asList(o4,o5,o6,o7,o8,o9), Arrays.asList(o4q1, o4q2,o5q1,o5q2,o6q1,o6q2,o7q1,o7q2,o8q1,o9q1,o9q2), null);
 
 
-    static Category oneCat3 = new Category("Знакови", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category oneCat3 = new Category("Знакови","Знакови" ,"desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
 
-    static Category oneCat4 = new Category("Упитник", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category oneCat4 = new Category("Упитник", "Упитник","desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
 
     public static final CategoryContainer one = new CategoryContainer("Mladi u saobracaju", Arrays.asList(oneCat1, oneCat2, oneCat3, oneCat4));
 
     static Question o10q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o10q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
-    static Category twoCat1 = new Category("Кривичноправна одговорност", "desc", null, Arrays.asList(o10q1, o10q2), null);
+    static Category twoCat1 = new Category("Кривичноправна одговорност", "Кривична одговорност","desc", null, Arrays.asList(o10q1, o10q2), null);
 
 
     static Question o11q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
@@ -104,14 +104,14 @@ public class FinalData {
     static CategoryObject o15 = new CategoryObject("Прекршаји санкционисани затворском казном", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
     static CategoryObject o16 = new CategoryObject("Казне за угрожавање деце", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
     static CategoryObject o17 = new CategoryObject("Искључење возача из саобраћаја", "...",R.drawable.cheese_1, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
-    static Category twoCat2 = new Category("Неке од казни", "Бла бла бла бла", Arrays.asList(o11, o12,o13,o14,o15,o16,o17), Arrays.asList(o11q1, o11q2), null);
+    static Category twoCat2 = new Category("Неке од казни","Неке од казни" ,"Бла бла бла бла", Arrays.asList(o11, o12,o13,o14,o15,o16,o17), Arrays.asList(o11q1, o11q2), null);
 
     static Question o12q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o12q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
-    static Category twoCat3 = new Category("Обавезно осигурање путника", "desc", null, Arrays.asList(o1q1, o1q2), null);
+    static Category twoCat3 = new Category("Обавезно осигурање путника","Обавезно осигурање путника" ,"desc", null, Arrays.asList(o1q1, o1q2), null);
 
 
-    static Category twoCat4 = new Category("Накнада штете", "desc",null,null, null);
+    static Category twoCat4 = new Category("Накнада штете", "Накнада штете","desc",null,null, null);
 
 
     static CategoryObject o18 = new CategoryObject("Полицијски или европски записник", "...",0, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
@@ -121,7 +121,7 @@ public class FinalData {
     static CategoryObject o22 = new CategoryObject("Када је возило иностране регистрације", "...",0, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
     static CategoryObject o23 = new CategoryObject("Када возилом управља лице под дејством алкохола и опојних средстава", "...",0, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
     static CategoryObject o24 = new CategoryObject("Казне за алкохолисане возаче", "...",0, Arrays.asList(o9q1, o9q2), "http://www.nesto.com");
-    static Category twoCat5 = new Category("Како наплатити штету", "desc", Arrays.asList(o18, o19,o20,o21,o22,o23,o24), Arrays.asList(o1q1, o1q2), null);
+    static Category twoCat5 = new Category("Како наплатити штету", "Како наплатити штету","desc", Arrays.asList(o18, o19,o20,o21,o22,o23,o24), Arrays.asList(o1q1, o1q2), null);
 
     public static final CategoryContainer two = new CategoryContainer("Prekrsaji", Arrays.asList(twoCat1, twoCat2, twoCat3, twoCat4, twoCat5));
 
@@ -141,7 +141,7 @@ public class FinalData {
     static Question o29q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
     static CategoryObject o29 = new CategoryObject("Педибус", "...",0, Arrays.asList(o29q1, o29q2), "http://www.nesto.com");
 
-    static Category threeCat1 = new Category("Безбедност деце", "desc", Arrays.asList(o25, o26, o27,o28,o29), Arrays.asList(o25q1, o25q2,o26q1, o26q2,o27q1, o27q2,o28q1, o28q2,o29q1, o29q2), null);
+    static Category threeCat1 = new Category("Безбедност деце", "Безбедност деце","desc", Arrays.asList(o25, o26, o27,o28,o29), Arrays.asList(o25q1, o25q2,o26q1, o26q2,o27q1, o27q2,o28q1, o28q2,o29q1, o29q2), null);
 
     static Question o30q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o30q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
@@ -156,20 +156,20 @@ public class FinalData {
     static Question o33q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
     static CategoryObject o33 = new CategoryObject("Урбани бициклисти", "...",0, Arrays.asList(o33q1, o33q2), "http://www.nesto.com");
 
-    static Category threeCat2 = new Category("Бициклизам", "desc", Arrays.asList(o30,o31,o32,o33), Arrays.asList(o30q1, o30q2,o31q1, o31q2,o32q1, o32q2,o33q1, o33q2), null);
+    static Category threeCat2 = new Category("Бициклизам", "Бициклизам","desc", Arrays.asList(o30,o31,o32,o33), Arrays.asList(o30q1, o30q2,o31q1, o31q2,o32q1, o32q2,o33q1, o33q2), null);
 
     static Question o34q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o34q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
     static CategoryObject o34 = new CategoryObject("Упоредна анализа", "...",0, Arrays.asList(o34q1, o34q2), "http://www.nesto.com");
     static Question o35q1 = new Question("Желите да сазнате у којој мери понашање утиче на безбедност у саобраћају? ", "Подаци говоре да понашање човека узрокује незгоде у преко 90% случајева. ");
     static Question o35q2 = new Question("Желите да сазнате о типовима личности чије црте указују на повећан ризик од удеса?", "Истраживања издвајају пет типова личности.");
-    static CategoryObject o35= new CategoryObject("Црне тачке", "...",0, Arrays.asList(o35q1, o35q2), "http://www.nesto.com");
+    static CategoryObject o35= new CategoryObject("Црне тачке","...",0, Arrays.asList(o35q1, o35q2), "http://www.nesto.com");
 
-    static Category threeCat3 = new Category("Анализе", "desc", Arrays.asList(o34, o35), Arrays.asList(o34q1, o34q2,o35q1, o35q2), null);
+    static Category threeCat3 = new Category("Анализе","Анализе" ,"desc", Arrays.asList(o34, o35), Arrays.asList(o34q1, o34q2,o35q1, o35q2), null);
 
 
-    static Category threeCat4 = new Category("Занимљивости", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
-    static Category threeCat5 = new Category("Догађаји", "desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category threeCat4 = new Category("Занимљивости", "Занимљивости","desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
+    static Category threeCat5 = new Category("Догађаји","Догађаји" ,"desc", Arrays.asList(o2, o3), Arrays.asList(o1q1, o1q2), null);
 
     public static final CategoryContainer three = new CategoryContainer("Aktivizam", Arrays.asList(threeCat1, threeCat2, threeCat3, threeCat4, threeCat5));
 
