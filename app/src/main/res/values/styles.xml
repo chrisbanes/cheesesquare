@@ -20,11 +20,10 @@
     <style name="Theme.DesignDemo" parent="Base.Theme.DesignDemo">
     </style>
 
-    <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Base.Theme.DesignDemo" parent="Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">#673AB7</item>
         <item name="colorPrimaryDark">#512DA8</item>
         <item name="colorAccent">#FF4081</item>
-        <item name="android:windowBackground">@color/window_background</item>
     </style>
 
     <style name="Widget.CardContent" parent="android:Widget">

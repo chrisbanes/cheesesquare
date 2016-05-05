@@ -24,6 +24,11 @@
     cheese caerphilly cheddar cheesecake cream cheese manchego lancashire. Roquefort squirty cheese
     the big cheese.</string>
   <string name="checkin">Checkin</string>
-  <string name="menu_settings">Settings</string>
+
+  <string name="menu_night_mode">Night mode</string>
+  <string name="menu_night_mode_system">Follow system</string>
+  <string name="menu_night_mode_day">Day (always)</string>
+  <string name="menu_night_mode_night">Night (always)</string>
+  <string name="menu_night_mode_auto">Auto</string>
 
 </resources>
