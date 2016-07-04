@@ -25,6 +25,9 @@
     the big cheese.</string>
   <string name="checkin">Checkin</string>
 
+  <string name="drawer_open">Open navigation drawer</string>
+  <string name="drawer_close">Close navigation drawer</string>
+
   <string name="menu_night_mode">Night mode</string>
   <string name="menu_night_mode_system">Follow system</string>
   <string name="menu_night_mode_day">Day (always)</string>
