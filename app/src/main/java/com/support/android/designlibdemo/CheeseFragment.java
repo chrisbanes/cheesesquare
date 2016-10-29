@@ -19,6 +19,7 @@ package com.support.android.designlibdemo;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -29,6 +30,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,12 +48,12 @@ import static android.content.ContentValues.TAG;
  * TODO
  */
 public class CheeseFragment extends Fragment {
-    private static Activity act;
-    private static ViewPager viewPager;
-    private static Adapter adapter;
-    private static DrawerLayout mDrawerLayout;
+    private Activity act;
+    private ViewPager viewPager;
+    private Adapter adapter;
+    private DrawerLayout mDrawerLayout;
 
-    private static void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(ViewPager viewPager) {
         adapter = new Adapter(((AppCompatActivity) act).getSupportFragmentManager());
         adapter.addFragment(new CheeseListFragment(), "Category 1");
         adapter.addFragment(new CheeseListFragment(), "Category 2");
@@ -73,9 +75,12 @@ public class CheeseFragment extends Fragment {
         mDrawerLayout = (DrawerLayout) act.findViewById(R.id.drawer_layout);
 
         Toolbar toolbar = (Toolbar) act.findViewById(R.id.toolbar);
-        ((AppCompatActivity) act).setSupportActionBar(toolbar);
-        ((AppCompatActivity) act).getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        ((AppCompatActivity) act).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         NavigationView navigationView = (NavigationView) act.findViewById(R.id.nav_view);
         if (navigationView != null) {
@@ -106,7 +111,7 @@ public class CheeseFragment extends Fragment {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         menuItem.setChecked(true);
                         mDrawerLayout.closeDrawers();
                         return true;
@@ -114,7 +119,7 @@ public class CheeseFragment extends Fragment {
                 });
     }
 
-    static class Adapter extends FragmentPagerAdapter {
+    class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentTitles = new ArrayList<>();
 

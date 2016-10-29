@@ -36,12 +36,11 @@ import java.util.List;
 import java.util.Random;
 
 public class CheeseListFragment extends Fragment {
-    private static RecyclerView rv;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rv = (RecyclerView) inflater.inflate(R.layout.fragment_cheese_list, container, false);
+        RecyclerView rv = (RecyclerView) inflater.inflate(R.layout.fragment_cheese_list, container, false);
         setupRecyclerView(rv);
         return rv;
     }
@@ -65,8 +64,8 @@ public class CheeseListFragment extends Fragment {
             extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
 
         private final TypedValue mTypedValue = new TypedValue();
-        private int mBackground;
-        private List<String> mValues;
+        private final int mBackground;
+        private final List<String> mValues;
 
         public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);

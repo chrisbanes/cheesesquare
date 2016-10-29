@@ -15,8 +15,6 @@ import android.view.MenuItem;
  */
 
 public class DrawerActivity extends AppCompatActivity {
-    private static final String TAG = "DrawerActivity";
-
     private DrawerLayout mDrawerLayout;
 
     @Override
