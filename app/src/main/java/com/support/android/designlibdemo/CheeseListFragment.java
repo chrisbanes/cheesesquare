@@ -90,10 +90,6 @@ public class CheeseListFragment extends Fragment {
             }
         }
 
-        public String getValueAt(int position) {
-            return mValues.get(position);
-        }
-
         public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
