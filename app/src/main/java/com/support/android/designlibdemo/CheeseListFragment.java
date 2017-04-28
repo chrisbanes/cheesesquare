@@ -16,10 +16,14 @@
 
 package com.support.android.designlibdemo;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -72,6 +76,8 @@ public class CheeseListFragment extends Fragment {
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public String mBoundString;
+            // Image view drawable id to share with detail activity
+            public int mDrawableId;
 
             public final View mView;
             public final ImageView mImageView;
@@ -116,14 +122,41 @@ public class CheeseListFragment extends Fragment {
                     Intent intent = new Intent(context, CheeseDetailActivity.class);
                     intent.putExtra(CheeseDetailActivity.EXTRA_NAME, holder.mBoundString);
 
-                    context.startActivity(intent);
+                    // Setup standard shared element transition for list item image.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        intent.putExtra(CheeseDetailActivity.EXTRA_DRAWABLE_ID,
+                                holder.mDrawableId);
+                        holder.mImageView.setTransitionName("sharedImage");
+                        ActivityOptionsCompat options = ActivityOptionsCompat.
+                                makeSceneTransitionAnimation(
+                                        getActivity(v.getContext()), // See helper below
+                                        holder.mImageView,
+                                        "sharedImage");
+                        context.startActivity(intent, options.toBundle());
+                    } else {
+                        context.startActivity(intent);
+                    }
                 }
             });
 
+            // Save drawable id to forward to detail activity.
+            holder.mDrawableId = Cheeses.getRandomCheeseDrawable();
             Glide.with(holder.mImageView.getContext())
-                    .load(Cheeses.getRandomCheeseDrawable())
+                    .load(holder.mDrawableId)
                     .fitCenter()
                     .into(holder.mImageView);
+        }
+
+        // Helper that traverses up context chain to retrieve the activity
+        // that is used in the shared element transition in onClick() above.
+        private Activity getActivity(Context context) {
+            while (context instanceof ContextWrapper) {
+                if (context instanceof Activity) {
+                    return (Activity)context;
+                }
+                context = ((ContextWrapper)context).getBaseContext();
+            }
+            return null;
         }
 
         @Override
