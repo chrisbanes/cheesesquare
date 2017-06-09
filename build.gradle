@@ -5,12 +5,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:3.0.0-alpha3'
     }
 }
 
 allprojects {
     repositories {
+        maven { url 'https://maven.google.com' }
         jcenter()
     }
 }
