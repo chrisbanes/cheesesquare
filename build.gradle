@@ -2,17 +2,21 @@
 
 buildscript {
     repositories {
-        maven { url 'https://maven.google.com' }
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-alpha6'
+        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
     }
+}
+
+ext {
+    supportLibVersion = '26.0.2'
 }
 
 allprojects {
     repositories {
-        maven { url 'https://maven.google.com' }
+        google()
         jcenter()
     }
 }

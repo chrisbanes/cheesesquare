@@ -27,11 +27,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.Random;
-
 public class CheeseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
+    private NightModeUtils nightModeUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +49,8 @@ public class CheeseDetailActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(cheeseName);
 
         loadBackdrop();
+
+        nightModeUtils = NightModeUtils.from(this);
     }
 
     private void loadBackdrop() {
@@ -62,4 +63,16 @@ public class CheeseDetailActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.sample_actions, menu);
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        nightModeUtils.checkNightMode(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return nightModeUtils.onNightModeItemSelected(item) || super.onOptionsItemSelected(item);
+    }
+
 }
