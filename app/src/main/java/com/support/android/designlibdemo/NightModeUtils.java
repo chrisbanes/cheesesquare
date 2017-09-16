@@ -1,7 +1,6 @@
 package com.support.android.designlibdemo;
 
 import android.app.Activity;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatDelegate;
 import android.view.Menu;
@@ -38,7 +37,7 @@ class NightModeUtils {
         return true;
     }
 
-    public boolean onNightModeItemSelected(@NonNull MenuItem item) {
+    boolean onNightModeItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_night_mode_system:
                 setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
@@ -61,9 +60,6 @@ class NightModeUtils {
     private void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
         AppCompatDelegate.setDefaultNightMode(nightMode);
 
-        if (Build.VERSION.SDK_INT >= 11) {
-            activity.recreate();
-        }
+        activity.recreate();
     }
-
 }
