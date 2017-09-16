@@ -27,11 +27,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.Random;
-
 public class CheeseDetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME = "cheese_name";
+    private NightModeUtils nightModeUtils;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,19 +40,20 @@ public class CheeseDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         collapsingToolbar.setTitle(cheeseName);
 
         loadBackdrop();
+
+        nightModeUtils = NightModeUtils.from(this);
     }
 
     private void loadBackdrop() {
-        final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
+        final ImageView imageView = findViewById(R.id.backdrop);
         Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
     }
 
@@ -62,4 +62,16 @@ public class CheeseDetailActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.sample_actions, menu);
         return true;
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        nightModeUtils.checkNightMode(menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return nightModeUtils.onNightModeItemSelected(item) || super.onOptionsItemSelected(item);
+    }
+
 }
