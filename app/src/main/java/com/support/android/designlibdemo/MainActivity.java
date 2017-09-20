@@ -16,8 +16,8 @@
 
 package com.support.android.designlibdemo;
 
-import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -35,9 +35,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,26 +51,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         if (viewPager != null) {
             setupViewPager(viewPager);
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }
 
@@ -135,10 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setNightMode(@AppCompatDelegate.NightMode int nightMode) {
         AppCompatDelegate.setDefaultNightMode(nightMode);
-
-        if (Build.VERSION.SDK_INT >= 11) {
-            recreate();
-        }
+        recreate();
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -153,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 menuItem.setChecked(true);
                 mDrawerLayout.closeDrawers();
                 return true;
