@@ -17,6 +17,7 @@
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -45,7 +46,8 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:fitsSystemWindows="true"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                tools:ignore="ContentDescription" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -159,6 +161,7 @@
         app:layout_anchorGravity="bottom|right|end"
         android:src="@drawable/ic_discuss"
         android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:focusable="true"/>
 
 </android.support.design.widget.CoordinatorLayout>
